@@ -18,6 +18,8 @@ print(f"Total # of words: {len(words)}")
 word_counts = {}
 
 for term in words:
+    if term in grammatical or len(term) < 2:
+        continue
     if term in word_counts:
         word_counts[term] += 1
     else:
