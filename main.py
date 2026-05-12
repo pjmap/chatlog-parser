@@ -9,8 +9,8 @@ with open(filename, "r") as file:
     text = file.read().lower()
 
 # Removes punctuation.
-for char in string.punctuation:
-    text = text.replace(char, "")
+for punc in string.punctuation:
+    text = text.replace(punc, "")
 
 # Splits text of whitespace.
 words = text.split()
@@ -19,7 +19,7 @@ print(f"Total # of words: {len(words)}")
 
 # Uses word_counts{} dictionary to track each unique term/word and # of occurrences.
 word_counts = {}
-grammatical = {
+stop_words = {
     "an", "the",
     "and", "or", "but",
     "is", "am", "are", "was", "were",
@@ -36,7 +36,7 @@ grammatical = {
 
 # Filters out grammatical/filler words, and builds dictionary.
 for term in words:
-    if term in grammatical or len(term) < 2:
+    if term in stop_words or len(term) < 2:
         continue
     if term in word_counts:
         word_counts[term] += 1
@@ -44,6 +44,13 @@ for term in words:
         word_counts[term] = 1
 
 print(f"# of unique words: {len(word_counts)}")
-print(word_counts)
 
-# print most common terms
+# Filters for most common themes/words.
+theme_words = {}
+
+for term, count in word_counts.items():
+    if count < 2:
+        continue
+    theme_words[term] = count
+
+print(theme_words)
