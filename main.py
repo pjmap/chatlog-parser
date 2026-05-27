@@ -17,7 +17,7 @@ words = text.split()
 
 print(f"Total # of words: {len(words)}")
 
-# Uses word_counts{} dictionary to track each unique term/word and # of occurrences.
+# Uses word_counts{} dictionary to store each unique term/word and # of occurrences.
 word_counts = {}
 stop_words = {
     "an", "the",
@@ -34,7 +34,7 @@ stop_words = {
     "not", "no", "yes"
 }
 
-# Filters out grammatical/filler words, and builds dictionary.
+# Filters out stop/filler words, and builds dictionary.
 for term in words:
     if term in stop_words or len(term) < 2:
         continue
@@ -54,3 +54,16 @@ for term, count in word_counts.items():
     theme_words[term] = count
 
 print(theme_words)
+
+# Sort most frequently occurring words
+sorted_terms = sorted(
+    theme_words.items(),
+    key=lambda item: item[1],
+    reverse=True
+)
+
+print(sorted_terms)
+
+# Multi-word detection (i.e., "object-oriented programming")
+
+# Metadata/tagging system (theme frequency by date, sentences mentioning "word")
